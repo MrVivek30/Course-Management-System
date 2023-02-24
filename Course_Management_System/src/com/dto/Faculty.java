@@ -10,6 +10,7 @@ public interface Faculty {
 	public String getFacultyname() ;
 
 	public void setFacultyname(String facultyname) ;
+	
 	public String getFacultyaddress() ;
 
 	public void setFacultyaddress(String facultyaddress) ;
