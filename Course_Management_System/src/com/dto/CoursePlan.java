@@ -11,6 +11,7 @@ public interface CoursePlan {
 	public void setBatchid(int batchid) ;
 
 	public int getDaynumber() ;
+	
 	public void setDaynumber(int daynumber);
 
 	public String getTopic() ;
