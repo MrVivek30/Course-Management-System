@@ -16,6 +16,7 @@ import com.dto.CoursePlan;
 import com.dto.CoursePlanImpl;
 import com.dto.Faculty;
 import com.dto.FacultyImpl;
+import com.dto.ReportForBatch;
 import com.exception.SomeThingWentWrong;
 
 public class AdminDaoImpl implements AdminDao{
@@ -66,15 +67,15 @@ public class AdminDaoImpl implements AdminDao{
 				list.add(c);
 				
 			
-			list.add(c);
+			
 			}
 			return list;
 		}
 		
 		
-		//*********************************faculty***********************************
+		//*********************************Admin***********************************
 		
-		// ----------------------FacultyLogin--------------------
+		// ----------------------AdminLogin--------------------
 		
 		public String AdminLogin(String username,String password) throws SomeThingWentWrong {
 			
@@ -204,7 +205,7 @@ public class AdminDaoImpl implements AdminDao{
 					String msg="Batch cannot be created ,please try again";
 					
 					try (Connection con=Dbutils.conToDatabase()){
-						String s="insert into Course values(?,?,?,?,?,?)";
+						String s="insert into batch values(?,?,?,?,?,?)";
 						
 						PreparedStatement ps=con.prepareStatement(s);
 						ps.setInt(1, b.getBatchid());
@@ -234,7 +235,7 @@ public class AdminDaoImpl implements AdminDao{
 				public String updateBatch(Batch b) {
 					String msg="Batch Cannot be updated,please Try again";
 					try (Connection con=Dbutils.conToDatabase()){
-						String s="update batch set courseid=?,facultyid=?,numberofstudents=?,batchstartdate=?duration=? where batchid=?";
+						String s="update batch set courseid=?,facultyid=?,numberofstudents=?,batchstartdate=?,duration=? where batchid=?";
 						
 						
 						PreparedStatement ps=con.prepareStatement(s);
@@ -439,5 +440,244 @@ public class AdminDaoImpl implements AdminDao{
 		return list;
 		
 		}
+		
+		
+		
+
+		//***************************************CoursePlan****************************************
+
+
+
+		//----------------------------createCoursePlan------------------------
+
+
+				public String createCoursePlan(CoursePlan cp) {
+					
+					String msg="Faculty cannot be created ,please try again";
+					
+					try (Connection con=Dbutils.conToDatabase()){
+						String s="insert into courseplan values(?,?,?,?,?)";
+						
+						PreparedStatement ps=con.prepareStatement(s);
+						ps.setInt(1, cp.getPlanid());
+						ps.setInt(2, cp.getBatchid());
+						ps.setInt(3, cp.getDaynumber());
+						ps.setString(4, cp.getTopic());
+						ps.setString(5, cp.getStatus());
+						if(ps.executeUpdate()>0) {
+							msg="CoursePlan created successfully";
+							
+						}
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					return msg;
+				}
+		//---------------------------updateCoursePlan--------------------------------
 				
+				
+				public String updateCoursePlan(CoursePlan cp) {
+					String msg="Faculty Cannot be updated,please Try again";
+					try (Connection con=Dbutils.conToDatabase()){
+						String s="update CoursePlan set batchid=?,daynumber=?,topic=?,status=? where planid=?  ";
+						
+						
+						PreparedStatement ps=con.prepareStatement(s);
+						
+						ps.setInt(1, cp.getBatchid());
+						ps.setInt(2, cp.getDaynumber());
+						ps.setString(3, cp.getTopic());
+						ps.setString(4, cp.getStatus());
+						ps.setInt(5, cp.getPlanid());
+						
+						if(ps.executeUpdate()>0) {
+							msg="Faculty updated successfully";
+							
+						}
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					return msg;
+				}
+
+				//------------------------viewCoursePlan---------------------------------
+				
+
+				// helper for Faculty--------------------------------------
+				
+				
+				private List<CoursePlan> getCoursePlansListFromResultSet(ResultSet rs) throws SQLException{
+					List<CoursePlan> list = new ArrayList<>();
+					
+					while(rs.next()) {
+						//Create an object of Employee
+						CoursePlan cp=new CoursePlanImpl();
+						cp.setPlanid(rs.getInt("planid"));
+						cp.setBatchid(rs.getInt("batchid"));
+						cp.setDaynumber(rs.getInt("daynumber"));
+						cp.setTopic(rs.getString("topic"));
+						cp.setStatus(rs.getString("status"));
+						
+						list.add(cp);
+						
+					}
+					return list;
+				}
+				
+			//-----------------------------viewCoursePlan---------------------------
+				
+				
+				
+				public List<CoursePlan> viewCoursePlan() throws SomeThingWentWrong{
+					
+				List<CoursePlan>list=null;
+				try(Connection con=Dbutils.conToDatabase()) {
+					String s="select * from CoursePlan";
+					PreparedStatement ps=con.prepareStatement(s);
+					
+					ResultSet rs=ps.executeQuery();
+					if(isResultSetEmpty(rs)) {
+						throw new SomeThingWentWrong();
+					}else {
+					 list=getCoursePlansListFromResultSet(rs);
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return list;
+				
+				}
+			
+		
+		
+		
+		//**************************************allocatefaculty***********************
+		
+		
+		public String allocateFacultyToBatch(int facultyid,int batchid){
+			
+			String msg="Not Allocated..Something went Wrong";
+			
+			try(Connection con=Dbutils.conToDatabase()) {
+				
+				String s="update batch set facultyid=? where batchid=?";
+				
+				PreparedStatement ps=con.prepareStatement(s);
+				
+				ps.setInt(1, facultyid);
+				ps.setInt(2, batchid);
+				
+				if(ps.executeUpdate()>0) {
+					msg="Faculty Allocated Successfully...!!!";
+				}
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return msg;
+			
+		}
+		
+		//******************************************DayWiseUpdateForEveryBatch*********************
+		
+		//---------helpermethod
+		
+	private List<ReportForBatch>getListOfDayWiseReportForEveryBatch(ResultSet rs) throws SQLException{
+		List<ReportForBatch>list=new ArrayList<>();
+		
+		while(rs.next()) {
+			ReportForBatch rb=new ReportForBatch();
+			
+			rb.setBatchId(rs.getInt("batchid"));
+//			rb.setBatchName(rs.getString("batchname"));
+			rb.setCourseId(rs.getInt("courseid"));
+			rb.setCourseName(rs.getString("coursename"));
+			rb.setDayNumber(rs.getInt("daynumber"));
+			rb.setStatus(rs.getString("status"));
+			rb.setFacultyId(rs.getInt("facultyid"));
+			rb.setFacultyName(rs.getString("facultyname"));
+			list.add(rb);
+		}
+	
+		return list;
+	}
+		
+	
+	public List<ReportForBatch>DayWiseUpdateForBatch() throws SomeThingWentWrong{
+		List<ReportForBatch> list=null;
+		try(Connection con=Dbutils.conToDatabase()) {
+			String s="Select b.batchid,c.courseid,c.coursename,cp.daynumber,cp.status,f.facultyid,"
+					+ "f.facultyname from courseplan cp inner join batch b on cp.batchid=b.batchid inner join course"
+					+ " c on c.courseid=b.courseid inner join faculty f on f.facultyid=b.facultyid ";
+		PreparedStatement ps=con.prepareStatement(s);
+	ResultSet r=ps.executeQuery();
+	if(isResultSetEmpty(r)) {
+		throw new SomeThingWentWrong();
+		
+	}else {
+		list=getListOfDayWiseReportForEveryBatch(r);
+		
+	}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+//	------------------*******************GenerateReportForEvaryBatch*******************
+	
+	//---------helper
+	
+	private List<ReportForBatch>generateReportList(ResultSet rs) throws SQLException {
+		List<ReportForBatch> list=new ArrayList<>();
+		while(rs.next()) {
+			ReportForBatch r=new ReportForBatch();
+			r.setBatchId(rs.getInt("batchid"));
+//			r.setBatchName(rs.getString("batchname"));
+			r.setFacultyId(rs.getInt("Facultyid"));
+			r.setFacultyName(rs.getString("facultyname"));
+			r.setDayNumber(rs.getInt("numberofstudents"));
+			r.setCourseId(rs.getInt("courseid"));
+			r.setCourseName(rs.getString("coursename"));
+			r.setFee(rs.getInt("fee"));
+			list.add(r);
+		}
+	return list;
+	}
+	
+	
+	public List<ReportForBatch>generateReport(int batchid) throws SomeThingWentWrong{
+		List<ReportForBatch>list=null;
+		try(Connection con=Dbutils.conToDatabase()) {
+			String s="Select b.batchid,f.facultyid,f.facultyname,b.numberofstudents,c.courseid,c.coursename,c.fee from ((batch b inner join faculty f on b.facultyid=f.facultyid) inner join course c on b.courseid=c.courseid) where b.batchid=?";
+			PreparedStatement ps=con.prepareStatement(s);
+			ps.setInt(1, batchid);
+			ResultSet rs=ps.executeQuery();
+			if(isResultSetEmpty(rs)) {
+				throw new SomeThingWentWrong();
+				
+			}else {
+				list=generateReportList(rs);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

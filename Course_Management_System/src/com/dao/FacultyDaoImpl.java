@@ -45,9 +45,11 @@ public class FacultyDaoImpl implements FacultyDao {
 	
 	
 	
-	public String FacultyLogin(String username,String password) throws SomeThingWentWrong  {
+	public boolean FacultyLogin(String username,String password) throws SomeThingWentWrong  {
 		
-	String str="Faculty login ";
+//	String str="Faculty login ";
+		boolean flag=false;
+		
 	try (Connection con=Dbutils.conToDatabase()){
 		
 		String log="Select * from faculty where username=?&&password=?";
@@ -62,7 +64,9 @@ public class FacultyDaoImpl implements FacultyDao {
 					
 		}else {
 			
-			str="Welcome"+rs.getString("username");
+//			str="Welcome"+rs.getString("username");
+			
+			flag=true;
 		}
 		
 	} catch (SQLException e) {
@@ -72,7 +76,7 @@ public class FacultyDaoImpl implements FacultyDao {
 	
 		
 		
-		return str;
+		return flag;
 	}
 	
 	
@@ -121,8 +125,8 @@ public class FacultyDaoImpl implements FacultyDao {
 			
 			PreparedStatement ps=con.prepareStatement(s);
 			
-			ps.setString(1, username);
-			ps.setString(2, password);
+			ps.setString(1, password);
+			ps.setString(2, username);
 			
 		if(ps.executeUpdate()>0) {
 			msg="Password Updated Successfully";
