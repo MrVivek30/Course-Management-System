@@ -128,9 +128,9 @@ public class ReportForBatch {
 
 	@Override
 	public String toString() {
-		return "ReportForBatch [BatchId=" + BatchId + ", CourseId=" + CourseId
+		return "    BatchId=" + BatchId + ", CourseId=" + CourseId
 				+ ", CourseName=" + CourseName + ", DayNumber=" + DayNumber + ", Status=" + Status + ", fee=" + fee
-				+ ", FacultyId=" + FacultyId + ", FacultyName=" + FacultyName + "]";
+				+ ", FacultyId=" + FacultyId + ", FacultyName=" + FacultyName + "";
 	}
 
 

@@ -45,14 +45,14 @@ public class FacultyDaoImpl implements FacultyDao {
 	
 	
 	
-	public boolean FacultyLogin(String username,String password) throws SomeThingWentWrong  {
+	public boolean FacultyLogin(String username,String password)  {
 		
 //	String str="Faculty login ";
 		boolean flag=false;
 		
 	try (Connection con=Dbutils.conToDatabase()){
 		
-		String log="Select * from faculty where username=?&&password=?";
+		String log="Select * from faculty where username=? and password=?";
 		PreparedStatement ps=con.prepareStatement(log);
 		ps.setString(1, username);
 		ps.setString(2, password);
@@ -60,7 +60,7 @@ public class FacultyDaoImpl implements FacultyDao {
 		ResultSet rs=ps.executeQuery();
 		if(isResultSetEmpty(rs)) {
 			
-		throw new SomeThingWentWrong("Invalid Username or Password");
+//		throw new SomeThingWentWrong("Invalid Username or Password");
 					
 		}else {
 			

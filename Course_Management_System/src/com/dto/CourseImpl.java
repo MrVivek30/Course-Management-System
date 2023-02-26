@@ -53,8 +53,8 @@ public class CourseImpl implements Course{
 
 	@Override
 	public String toString() {
-		return "CourseImpl [courseid=" + courseid + ", coursename=" + coursename + ", fee=" + fee
-				+ ", courseDescription=" + courseDescription + "]";
+		return "   courseid=" + courseid + ", coursename=" + coursename + ", fee=" + fee
+				+ ", courseDescription=" + courseDescription + "";
 	}
 	
 	
