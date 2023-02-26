@@ -109,9 +109,9 @@ public class AllocateFaculty {
 
 	@Override
 	public String toString() {
-		return "AllocateFaculty [FacultyId=" + FacultyId + ", FacultyName=" + FacultyName + ", batchId=" + batchId
+		return "   FacultyId=" + FacultyId + ", FacultyName=" + FacultyName + ", batchId=" + batchId
 				+ ", NumberOfStudents=" + NumberOfStudents + ", CourseId=" + CourseId + ", CourseName=" + CourseName
-				+ "]";
+				+ "";
 	}
 	
 	

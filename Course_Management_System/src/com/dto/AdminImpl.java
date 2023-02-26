@@ -35,7 +35,7 @@ public class AdminImpl implements Admin{
 
 	@Override
 	public String toString() {
-		return "AdminImpl [usrename=" + usrename + ", password=" + password + "]";
+		return "usrename=" + usrename + ", password=" + password + "";
 	}
 	
 	

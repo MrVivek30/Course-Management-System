@@ -63,8 +63,8 @@ public class CoursePlanImpl implements CoursePlan{
 
 	@Override
 	public String toString() {
-		return "CoursePlanImpl [planid=" + planid + ", batchid=" + batchid + ", daynumber=" + daynumber + ", topic="
-				+ topic + ", status=" + status + "]";
+		return "    planid=" + planid + ", batchid=" + batchid + ", daynumber=" + daynumber + ", topic="
+				+ topic + ", status=" + status + "";
 	}
 	
 	

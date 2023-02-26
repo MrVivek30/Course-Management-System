@@ -81,9 +81,9 @@ public class BatchImpl implements Batch{
 
 	@Override
 	public String toString() {
-		return "BatchImpl [batchid=" + batchid + ", courseid=" + courseid + ", facultyid=" + facultyid
+		return "    batchid=" + batchid + ", courseid=" + courseid + ", facultyid=" + facultyid
 				+ ", numberofStudents=" + numberofStudents + ", batchstartDate=" + batchstartDate + ", duration="
-				+ duration + "]";
+				+ duration + "";
 	}
 	
 	
