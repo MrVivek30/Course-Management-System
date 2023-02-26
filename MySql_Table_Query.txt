@@ -1,0 +1,127 @@
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-MySql Query-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-Creating Database-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+mysql> create database Project;
+Query OK, 1 row affected (0.46 sec)
+
+mysql> use project;
+Database changed
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-Creating Table Admin-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+mysql> create table admin(username varchar(50) unique not null,password varchar(20) unique not null);
+Query OK, 0 rows affected (1.08 sec)
+
+mysql> desc admin;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| username | varchar(50) | NO   | PRI | NULL    |       |
+| password | varchar(20) | NO   | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.26 sec)
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-Creating Table Faculty-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+mysql> create table faculty(
+    -> facultyId int primary key auto_increment,
+    -> facultyName varchar(50),
+    -> facultyAddress varchar(50),
+    -> mobile varchar(10),
+    -> email varchar(30),
+    -> username varchar(50),
+    -> password varchar(20)
+    -> );
+Query OK, 0 rows affected (0.47 sec)
+
+mysql> desc faculty;
++----------------+-------------+------+-----+---------+----------------+
+| Field          | Type        | Null | Key | Default | Extra          |
++----------------+-------------+------+-----+---------+----------------+
+| facultyId      | int         | NO   | PRI | NULL    | auto_increment |
+| facultyName    | varchar(50) | YES  |     | NULL    |                |
+| facultyAddress | varchar(50) | YES  |     | NULL    |                |
+| mobile         | varchar(10) | YES  |     | NULL    |                |
+| email          | varchar(30) | YES  |     | NULL    |                |
+| username       | varchar(50) | YES  |     | NULL    |                |
+| password       | varchar(20) | YES  |     | NULL    |                |
++----------------+-------------+------+-----+---------+----------------+
+7 rows in set (0.24 sec)
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-Creating Table Course-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+mysql> create table course(
+    -> courseId int primary key auto_increment,
+    -> courseName varchar(20),
+    -> fee int,
+    -> courseDescription varchar(50)
+    -> );
+Query OK, 0 rows affected (0.43 sec)
+
+mysql> desc course;
++-------------------+-------------+------+-----+---------+----------------+
+| Field             | Type        | Null | Key | Default | Extra          |
++-------------------+-------------+------+-----+---------+----------------+
+| courseId          | int         | NO   | PRI | NULL    | auto_increment |
+| courseName        | varchar(20) | YES  |     | NULL    |                |
+| fee               | int         | YES  |     | NULL    |                |
+| courseDescription | varchar(50) | YES  |     | NULL    |                |
++-------------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-Creating Table Batch-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+mysql> create table batch(
+    -> batchId int primary key auto_increment,
+    -> courseId int,
+    -> facultyId int,
+    -> numberOfStudents int,
+    -> batchStartDate date,
+    -> duration varchar(15),
+    -> foreign key (courseId) references course(courseId),
+    -> foreign key (facultyId) references faculty(facultyId)
+    -> );
+Query OK, 0 rows affected (0.29 sec)
+
+mysql> desc batch;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| batchId          | int         | NO   | PRI | NULL    | auto_increment |
+| courseId         | int         | YES  | MUL | NULL    |                |
+| facultyId        | int         | YES  | MUL | NULL    |                |
+| numberOfStudents | int         | YES  |     | NULL    |                |
+| batchStartDate   | date        | YES  |     | NULL    |                |
+| duration         | varchar(15) | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-Creating Table CoursePlan-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+mysql> create table coursePlan(
+    -> planId int primary key auto_increment,
+    -> batchId int,
+    -> daynumber int,
+    -> topic varchar(15),
+    -> status varchar(10),
+    -> foreign key (batchId) references batch(batchId)
+    -> );
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> desc courseplan;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| planId    | int         | NO   | PRI | NULL    | auto_increment |
+| batchId   | int         | YES  | MUL | NULL    |                |
+| daynumber | int         | YES  |     | NULL    |                |
+| topic     | varchar(15) | YES  |     | NULL    |                |
+| status    | varchar(10) | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
