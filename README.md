@@ -6,7 +6,7 @@
 <p align="center">
   This is my construct week project. made with Java, JDBC, and MySQL technology.
   <br/>
-  Check out my <a href="https://github.com/MrVivek30" target="_blank">Portfolio</a>
+  Check out my <a href="https://mrvivek30.github.io/" target="_blank">Portfolio</a>
 </p>
 
 <p align="center">
