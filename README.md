@@ -1,7 +1,7 @@
-### Course-Monitoring-System `Monitor`
+### Course-Management-System `Monitor`
  
 <h1 align="center" style="font-size:35px">
-  <b>Course Monitoring System</b>
+  <b>Course Management System</b>
 </h1>
 <p align="center">
   This is my construct week project. made with Java, JDBC, and MySQL technology.
@@ -18,7 +18,7 @@
 
 ## Description
 
-`Course Monitoring Systems` is used to monitor the course in a organization, helps system administrators monitor their infrastructure.
+`Course Management Systems` is used to monitor the course in a organization, helps system administrators monitor their infrastructure.
 
 In an educational Institute there are several courses running parallel every day. For every course there are several batches at same/different time. Every course has a session wise/day wise schedule. It will be difficult for the Faculty Head to know the status of every batch i.e what is the session taught at each day in a batch.
 
