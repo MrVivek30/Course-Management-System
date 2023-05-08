@@ -30,7 +30,7 @@ In a cunstruct week of SB101 in Masai School I made this project indivisually so
 
 ## Tech Stack
 
-[![My Skills](https://skillicons.dev/icons?i=java,hibernate,mysql,github,git)]()
+[![My Skills](https://skillicons.dev/icons?i=java,mysql,github,git)]()
 ## Features
 
 1. Basic authentication of various user accounts (admin, faculty).
