@@ -26,7 +26,7 @@ So the Automated Course Monitoring System will keep the records of all the cours
 
 ## Contribution
 
-In a cunstruct week of SB101 in Masai School I made this project indivisually so I did all the funtions with myself.
+In a construct week of SB101 in Masai School I made this project indivisually so I did all the funtions with myself.
 
 ## Tech Stack
 
