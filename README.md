@@ -47,8 +47,8 @@ In a cunstruct week of SB101 in Masai School I made this project indivisually so
 
 ## Screenshots
 
-![Admin Login](https://user-images.githubusercontent.com/88590770/209419163-b7c6ac89-0ba2-4eee-b5a7-cd96cd5c8b9a.jpg)
-![Faculty Login](https://user-images.githubusercontent.com/88590770/209419173-3be2297e-fd6c-4aa5-b0f4-57191c1c6337.jpg)
+![Admin Login](https://drive.google.com/file/d/1nfvqnyhikuhzy5-sTWgQK8rmoVlClNpi/view?usp=share_link)
+![Faculty Login](https://drive.google.com/file/d/1oD7X7QHGl_-jmcH3l0eBKjJIkD1M2oGq/view?usp=share_link)
 <br/><br/>
 
 ## ER Diagram
